@@ -23,7 +23,11 @@ public class Hotel {
 
     private String nome;
     private String endereco;
+
+    @Column(unique = true)
     private String telefone;
+
+    @Column(unique = true)
     private String email;
 
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
