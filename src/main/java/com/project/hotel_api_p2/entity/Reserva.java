@@ -12,10 +12,6 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "tb_reservas")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,4 +31,62 @@ public class Reserva {
     @ManyToOne
     @JoinColumn(name = "quarto_id")
     private Quarto quarto;
+
+    public Reserva(){}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDate getDataCheckIn() {
+        return dataCheckIn;
+    }
+
+    public void setDataCheckIn(LocalDate dataCheckIn) {
+        this.dataCheckIn = dataCheckIn;
+    }
+
+    public LocalDate getDataCheckOut() {
+        return dataCheckOut;
+    }
+
+    public void setDataCheckOut(LocalDate dataCheckOut) {
+        this.dataCheckOut = dataCheckOut;
+    }
+
+    public BigDecimal getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(BigDecimal valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    public StatusReserva getStatusReserva() {
+        return statusReserva;
+    }
+
+    public void setStatusReserva(StatusReserva statusReserva) {
+        this.statusReserva = statusReserva;
+    }
+
+    public Hospede getHospede() {
+        return hospede;
+    }
+
+    public void setHospede(Hospede hospede) {
+        this.hospede = hospede;
+    }
+
+    public Quarto getQuarto() {
+        return quarto;
+    }
+
+    public void setQuarto(Quarto quarto) {
+        this.quarto = quarto;
+    }
 }
