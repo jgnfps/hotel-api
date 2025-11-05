@@ -63,7 +63,6 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.DELETE, "/hospedes/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/hospedes/**").authenticated()
 
-                        // Qualquer outro endpoint precisa de autenticação
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
