@@ -22,5 +22,8 @@ public record QuartoRequestDTO(
         Boolean disponivel,
 
         @NotNull(message = "O ID do hotel é obrigatório")
-        Long hotelId
-) { }
+        Long hotelId,
+
+        @NotNull(message = "A quantidade de Hospedes deve ser informada")
+        Integer capacidadeHospedes
+) {}

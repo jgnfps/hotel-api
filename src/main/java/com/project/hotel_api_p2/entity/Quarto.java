@@ -20,12 +20,21 @@ public class Quarto {
     private String tipo;
     private BigDecimal precoDiaria;
     private Boolean disponivel;
+    private int capacidadeHospedes;
 
     @ManyToOne
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
 
     public Quarto(){}
+
+    public int getCapacidadeHospedes() {
+        return capacidadeHospedes;
+    }
+
+    public void setCapacidadeHospedes(int capacidadeHospedes) {
+        this.capacidadeHospedes = capacidadeHospedes;
+    }
 
     public Long getId() {
         return id;

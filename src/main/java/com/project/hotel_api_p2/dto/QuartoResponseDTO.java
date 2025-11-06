@@ -8,6 +8,7 @@ public record QuartoResponseDTO (
         String tipo,
         BigDecimal precoDiaria,
         Boolean disponivel,
-        String hotel
+        String hotel,
+        Integer capacidadeHospedes
 ){
 }
