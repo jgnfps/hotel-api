@@ -32,7 +32,19 @@ public class Reserva {
     @JoinColumn(name = "quarto_id")
     private Quarto quarto;
 
+    private int quantidadeHospedes;
+
+
+
     public Reserva(){}
+
+    public int getQuantidadeHospedes() {
+        return quantidadeHospedes;
+    }
+
+    public void setQuantidadeHospedes(int quantidadeHospedes) {
+        this.quantidadeHospedes = quantidadeHospedes;
+    }
 
     public Long getId() {
         return id;

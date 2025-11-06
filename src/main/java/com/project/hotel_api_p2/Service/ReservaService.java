@@ -1,6 +1,5 @@
 package com.project.hotel_api_p2.Service;
 
-
 import com.project.hotel_api_p2.dto.ReservaRequestDTO;
 import com.project.hotel_api_p2.dto.ReservaResponseDTO;
 import com.project.hotel_api_p2.entity.Hospede;
@@ -18,31 +17,38 @@ import java.util.List;
 
 @Service
 public class ReservaService {
+
     @Autowired
     private ReservaRespository reservaRespository;
+
     @Autowired
     private QuartoRepository quartoRepository;
+
     @Autowired
     private HospedeRepository hospedeRepository;
 
     public ReservaResponseDTO createReserva(ReservaRequestDTO reservaRequestDTO) {
 
         Hospede hospede = hospedeRepository.findById(reservaRequestDTO.hospedeId())
-                .orElseThrow(()-> new EntityNotFoundException("Hospede não encontrado com o Id: " + reservaRequestDTO.hospedeId()));
+                .orElseThrow(() -> new EntityNotFoundException("Hóspede não encontrado com o Id: " + reservaRequestDTO.hospedeId()));
 
         Quarto quarto = quartoRepository.findById(reservaRequestDTO.quartoId())
-                .orElseThrow(()-> new EntityNotFoundException("Quarto não encontrado com o Id: " + reservaRequestDTO.quartoId()));
+                .orElseThrow(() -> new EntityNotFoundException("Quarto não encontrado com o Id: " + reservaRequestDTO.quartoId()));
+
+        if (reservaRequestDTO.quantidadeHospedes() > quarto.getCapacidadeHospedes()) {
+            throw new IllegalArgumentException("A quantidade de hóspedes excede a capacidade do quarto selecionado.");
+        }
 
         StatusReserva status = StatusReserva.valueOf(reservaRequestDTO.statusReserva().toUpperCase());
 
         Reserva reserva = new Reserva();
-
         reserva.setDataCheckIn(reservaRequestDTO.dataCheckIn());
         reserva.setDataCheckOut(reservaRequestDTO.dataCheckOut());
         reserva.setValorTotal(reservaRequestDTO.valorTotal());
         reserva.setStatusReserva(status);
         reserva.setHospede(hospede);
         reserva.setQuarto(quarto);
+        reserva.setQuantidadeHospedes(reservaRequestDTO.quantidadeHospedes());
 
         reservaRespository.save(reserva);
 
@@ -53,17 +59,18 @@ public class ReservaService {
                 reserva.getValorTotal(),
                 reserva.getStatusReserva().name(),
                 reserva.getHospede().getNomeCompleto(),
-                reserva.getQuarto().getNumero()
+                reserva.getQuarto().getNumero(),
+                reserva.getQuantidadeHospedes()
         );
     }
 
     public void deleteReserva(Long reservaId) {
         Reserva reserva = reservaRespository.findById(reservaId)
-                .orElseThrow(()-> new EntityNotFoundException("Reserva não encontrada com o Id: " + reservaId));
+                .orElseThrow(() -> new EntityNotFoundException("Reserva não encontrada com o Id: " + reservaId));
         reservaRespository.delete(reserva);
     }
 
-    public List<ReservaResponseDTO> getAllReservas(){
+    public List<ReservaResponseDTO> getAllReservas() {
         return reservaRespository.findAll()
                 .stream()
                 .map(reserva -> new ReservaResponseDTO(
@@ -73,14 +80,15 @@ public class ReservaService {
                         reserva.getValorTotal(),
                         reserva.getStatusReserva().name(),
                         reserva.getHospede().getNomeCompleto(),
-                        reserva.getQuarto().getNumero()
+                        reserva.getQuarto().getNumero(),
+                        reserva.getQuantidadeHospedes()
                 ))
                 .toList();
     }
 
     public ReservaResponseDTO getReservaById(Long reservaId) {
         Reserva reserva = reservaRespository.findById(reservaId)
-                .orElseThrow(()-> new EntityNotFoundException("Reserva não encontrada com o Id: " + reservaId));
+                .orElseThrow(() -> new EntityNotFoundException("Reserva não encontrada com o Id: " + reservaId));
 
         return new ReservaResponseDTO(
                 reserva.getId(),
@@ -89,19 +97,24 @@ public class ReservaService {
                 reserva.getValorTotal(),
                 reserva.getStatusReserva().name(),
                 reserva.getHospede().getNomeCompleto(),
-                reserva.getQuarto().getNumero()
+                reserva.getQuarto().getNumero(),
+                reserva.getQuantidadeHospedes()
         );
     }
 
     public ReservaResponseDTO updateReserva(Long reservaId, ReservaRequestDTO reservaRequestDTO) {
         Reserva reserva = reservaRespository.findById(reservaId)
-                .orElseThrow(()-> new EntityNotFoundException("Reserva não encontrada com o Id: " + reservaId));
+                .orElseThrow(() -> new EntityNotFoundException("Reserva não encontrada com o Id: " + reservaId));
 
         Hospede hospede = hospedeRepository.findById(reservaRequestDTO.hospedeId())
-                .orElseThrow(()-> new EntityNotFoundException("Hospede não encontrado com o Id: " + reservaRequestDTO.hospedeId()));
+                .orElseThrow(() -> new EntityNotFoundException("Hóspede não encontrado com o Id: " + reservaRequestDTO.hospedeId()));
 
         Quarto quarto = quartoRepository.findById(reservaRequestDTO.quartoId())
-                .orElseThrow(()-> new EntityNotFoundException("Quarto não encontrado com o Id: " + reservaRequestDTO.quartoId()));
+                .orElseThrow(() -> new EntityNotFoundException("Quarto não encontrado com o Id: " + reservaRequestDTO.quartoId()));
+
+        if (reservaRequestDTO.quantidadeHospedes() > quarto.getCapacidadeHospedes()) {
+            throw new IllegalArgumentException("A quantidade de hóspedes excede a capacidade do quarto selecionado.");
+        }
 
         StatusReserva status = StatusReserva.valueOf(reservaRequestDTO.statusReserva().toUpperCase());
 
@@ -111,6 +124,7 @@ public class ReservaService {
         reserva.setStatusReserva(status);
         reserva.setHospede(hospede);
         reserva.setQuarto(quarto);
+        reserva.setQuantidadeHospedes(reservaRequestDTO.quantidadeHospedes());
 
         reservaRespository.save(reserva);
 
@@ -121,8 +135,8 @@ public class ReservaService {
                 reserva.getValorTotal(),
                 reserva.getStatusReserva().name(),
                 reserva.getHospede().getNomeCompleto(),
-                reserva.getQuarto().getNumero()
+                reserva.getQuarto().getNumero(),
+                reserva.getQuantidadeHospedes()
         );
     }
-
 }

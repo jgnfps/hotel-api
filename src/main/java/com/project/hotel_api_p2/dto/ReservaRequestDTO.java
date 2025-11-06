@@ -26,6 +26,9 @@ public record ReservaRequestDTO(
         Long hospedeId,
 
         @NotNull(message = "O ID do quarto é obrigatório.")
-        Long quartoId
+        Long quartoId,
+
+        @NotNull(message = "A capacidade de Hospedes é obrigatória")
+        Integer quantidadeHospedes
         ){
 }

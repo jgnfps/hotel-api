@@ -10,7 +10,8 @@ public record ReservaResponseDTO (
         BigDecimal valorTotal,
         String statusReserva,
         String nomeHospede,
-        String numeroQuarto
+        String numeroQuarto,
+        Integer quantidadeHospedes
 
 ){
 }
