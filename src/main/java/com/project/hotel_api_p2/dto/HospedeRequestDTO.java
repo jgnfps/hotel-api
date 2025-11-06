@@ -20,6 +20,9 @@ public record HospedeRequestDTO (
 
         @NotBlank(message = "O telefone é obrigatório")
         @Pattern(regexp = "\\d{10,11}", message = "O telefone deve conter apenas números (10 ou 11 dígitos)")
-        String telefone
+        String telefone,
+
+        @NotBlank(message = "O endereço é obrigatório")
+        String endereco
 ) {}
 

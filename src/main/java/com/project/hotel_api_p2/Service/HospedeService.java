@@ -25,6 +25,7 @@ public class HospedeService {
         hospede.setCpf(dto.cpf());
         hospede.setEmail(dto.email());
         hospede.setTelefone(dto.telefone());
+        hospede.setEndereco(dto.endereco());
 
         hospedeRepository.save(hospede);
 
@@ -33,7 +34,8 @@ public class HospedeService {
                 hospede.getNomeCompleto(),
                 hospede.getCpf(),
                 hospede.getEmail(),
-                hospede.getTelefone()
+                hospede.getTelefone(),
+                hospede.getEndereco()
         );
     }
 
@@ -44,7 +46,8 @@ public class HospedeService {
                         h.getNomeCompleto(),
                         h.getCpf(),
                         h.getEmail(),
-                        h.getTelefone()
+                        h.getTelefone(),
+                        h.getEndereco()
                 ))
                 .toList();
     }
@@ -58,7 +61,8 @@ public class HospedeService {
                 hospede.getNomeCompleto(),
                 hospede.getCpf(),
                 hospede.getEmail(),
-                hospede.getTelefone()
+                hospede.getTelefone(),
+                hospede.getEndereco()
         );
     }
 
@@ -70,6 +74,7 @@ public class HospedeService {
         hospede.setCpf(dto.cpf());
         hospede.setEmail(dto.email());
         hospede.setTelefone(dto.telefone());
+        hospede.setEndereco(dto.endereco());
 
         hospedeRepository.save(hospede);
 
@@ -78,7 +83,8 @@ public class HospedeService {
                 hospede.getNomeCompleto(),
                 hospede.getCpf(),
                 hospede.getEmail(),
-                hospede.getTelefone()
+                hospede.getTelefone(),
+                hospede.getEndereco()
         );
     }
 

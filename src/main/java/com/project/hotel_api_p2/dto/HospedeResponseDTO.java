@@ -5,5 +5,6 @@ public record HospedeResponseDTO(
         String nomeCompleto,
         String cpf,
         String email,
-        String telefone
+        String telefone,
+        String endereco
 ) {}

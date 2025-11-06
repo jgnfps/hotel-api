@@ -26,11 +26,20 @@ public class Hospede {
     private String cpf;
     private String email;
     private String telefone;
+    private String endereco;
 
     @OneToMany(mappedBy = "hospede", cascade = CascadeType.ALL)
     private List<Reserva> reservas = new ArrayList<>();
 
     public Hospede(){}
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
 
     public Long getId() {
         return id;
