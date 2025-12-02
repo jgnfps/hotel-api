@@ -38,8 +38,6 @@ model/ → entidades
 dto/ → objetos de transferência
 exception/ → tratamento de erros
 
-yaml
-Copiar código
 
 Essa separação facilita manutenção, testes e reuso.
 
