@@ -52,7 +52,7 @@ Essa separação facilita manutenção, testes e reuso.
 ### Passos
 
 ```bash
-git clone https://github.com/<seu-usuario>/<nome-repositorio>.git
+git clone https://github.com/jgnfps/hotel-api
 cd <nome-repositorio>
 mvn spring-boot:run
 
